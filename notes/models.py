@@ -7,8 +7,11 @@ class Notes(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
+    counter = 0
+
     def __str__(self):
-        return self.text
+        self.counter += 1
+        return self.counter + "-note"
 
     def snippet(self):
         if len(self.text) >= 20:
