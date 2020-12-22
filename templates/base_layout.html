@@ -5,13 +5,26 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Rokovnik</title>
-{#    <link rel="stylesheet" href="{% static 'styles.css'%}">#}
+    <link rel="stylesheet" href="{% static 'styles.css'%}">
 </head>
 <body>
-    <h1>BASE LAYOUT</h1>
-    {% block notes %}
-    {% endblock %}
-    {% block todos %}
-    {% endblock %}
+    <nav class="navigation">
+        <img src="{% static 'logo.svg' %}" alt="logo" class="logo">
+        <div class="menu">
+            <a href="{% url 'notes:list' %}">Notes</a>
+            |
+            <a href="{% url 'todos:list' %}">Todo list</a>
+        </div>
+        <div class="nav-list">
+            <a>Aaaa</a>
+            <a>aaaa</a>
+        </div>
+    </nav>
+    <div class="inner">
+        {% block notes %}
+        {% endblock %}
+        {% block todos %}
+        {% endblock %}
+    </div>
 </body>
 </html>

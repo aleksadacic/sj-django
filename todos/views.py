@@ -4,8 +4,9 @@ from . import forms
 
 
 def todo_list(request):
-    notes = Todos.objects.all().order_by('time')
-    return render(request, "todos/todos_list.html", {'notes': notes})
+    todos = Todos.objects.all().order_by('time')
+    form = forms.CreateTodo()
+    return render(request, "todos/todos_list.html", {'todos': todos, 'form': form})
 
 
 # login anotacija
@@ -20,4 +21,4 @@ def todos_create(request):
         # return redirect('notes:list')
     else:
         form = forms.CreateTodo()
-    return render(request, 'todos/todos_create.html', {'form': form})
+    return render(request, 'todos/todos_list.html', {'form': form})

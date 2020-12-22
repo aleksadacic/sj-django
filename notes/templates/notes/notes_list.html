@@ -1,15 +1,31 @@
 {% extends 'base_layout.html' %}
 
 {% block notes %}
-    <h1>
-       Notes list
-    </h1>
-    <div class="notes">
-        {% for note in notes %}
-            <div class="note">
-                <p>{{ note.text }}</p>
-                <p>{{ note.date }}</p>
-            </div>
-        {% endfor %}
+    <div class="notes-container">
+        <div class="search-container">
+            <input class="searchbox" type="text" placeholder="Search...">
+            <button class="searchbutton" type="submit">Search</button>
+        </div>
+        <div class="create-notes">
+            <form action="{% url 'notes:list' %}" class="site-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Create">
+            </form>
+        </div>
+        <div class="notes">
+            {% for note in notes %}
+                <div class="note">
+                    <div class="snippet">
+                        <p class="note-text">{{ note.snippet }}</p>
+                        <p class="note-date">{{ note.date }}</p>
+                    </div>
+                    <div class="area">
+                        <textarea class="editor">{{ note.text }}</textarea>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
