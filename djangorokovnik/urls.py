@@ -7,4 +7,6 @@ urlpatterns = [
     path('', views.homepage),
     path('notes/', include("notes.urls")),
     path('todos/', include("todos.urls")),
+    path('accounts/', include("accounts.urls")),
+
 ]

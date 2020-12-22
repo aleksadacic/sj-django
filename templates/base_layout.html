@@ -6,24 +6,37 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Rokovnik</title>
     <link rel="stylesheet" href="{% static 'styles.css'%}">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <nav class="navigation">
         <img src="{% static 'logo.svg' %}" alt="logo" class="logo">
         <div class="menu">
-            <a href="{% url 'notes:list' %}">Notes</a>
-            |
-            <a href="{% url 'todos:list' %}">Todo list</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'notes:list' %}">Notes</a>
+                |
+                <a href="{% url 'todos:list' %}">Todo list</a>
+            {% endif %}
         </div>
         <div class="nav-list">
-            <a>Aaaa</a>
-            <a>aaaa</a>
+            {% if user.is_authenticated == False %}
+                <a href="{% url 'accounts:login' %}">Log in</a>
+                |
+                <a href="{% url 'accounts:signup' %}">Create an Account</a>
+            {% else %}
+                <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                    {% csrf_token %}
+                    <a onclick="$(this).closest('form').submit()">Log out</a>
+                </form>
+            {% endif %}
         </div>
     </nav>
     <div class="inner">
         {% block notes %}
         {% endblock %}
         {% block todos %}
+        {% endblock %}
+        {% block accounts %}
         {% endblock %}
     </div>
 </body>
