@@ -1,13 +1,15 @@
 {% extends 'base_layout.html' %}
-
 {% block notes %}
     <div class="notes-container">
         <div class="search-container">
-            <input class="searchbox" type="text" placeholder="Search...">
-            <button class="searchbutton" type="submit">Search</button>
+            <form action="{% url 'notes:search' %}" class="site-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" value="" name="query">
+                <button class="searchbutton" type="submit">Search</button>
+            </form>
         </div>
         <div class="create-notes">
-            <form action="{% url 'notes:list' %}" class="site-form" method="post" enctype="multipart/form-data">
+            <form action="{% url 'notes:create' %}" class="site-form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form }}
                 <input type="submit" value="Create">
@@ -19,12 +21,22 @@
                     <div class="snippet">
                         <p class="note-text">{{ note.snippet }}</p>
                         <p class="note-date">{{ note.date }}</p>
+                        <form action="{% url 'notes:delete' %}" class="delete-form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="id_note" value="{{ note.id }}">
+                            <input class="delete" type="submit" value="Delete">
+                        </form>
                     </div>
-                    <div class="area">
-                        <textarea class="editor">{{ note.text }}</textarea>
-                    </div>
+                    <form action="{% url 'notes:update' %}" class="update-form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="area">
+                            <input type="submit" value="Update">
+                            <input type="hidden" name="id_note" value="{{ note.id }}">
+                            <input type="hidden" class="hidden-text" value="{{ note.text }}">
+                            {{ update_form }}
+                        </div>
+                    </form>
                 </div>
-
             {% endfor %}
         </div>
     </div>

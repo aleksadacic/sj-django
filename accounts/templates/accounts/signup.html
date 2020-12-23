@@ -2,11 +2,10 @@
 
 {% block accounts %}
 
-    <h1>Create an Account</h1>
-    <form class="site-form" action="{% url 'accounts:signup' %}" method="post">
+    <form class="signup-form" action="{% url 'accounts:signup' %}" method="post">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Signup">
+        <input class='submit-button' type="submit" value="Signup">
     </form>
 
 {% endblock %}

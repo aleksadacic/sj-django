@@ -99,12 +99,17 @@ a:hover{
     width: 100%;
 }
 
+.area > label {
+    display: none;
+}
+
 .editor {
     width: 100%;
     border: none;
     background-color: whitesmoke;
     font-family: Consolas;
     text-indent: 1%;
+    height: 15vh;
 }
 
 .site-form {
@@ -126,4 +131,49 @@ a:hover{
 
 .site-form label {
     display: none;
+}
+
+.signup-form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 30%;
+    margin: auto;
+    background-color: #407d3a;
+    color: white;
+    margin-top: 5%;
+    padding: 4%;
+}
+
+.signup-form input {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 5%;
+}
+
+.signup-form label {
+    width: 50%;
+    margin: auto;
+    font-weight: bold;
+}
+
+.signup-form .helptext{
+    display: none;
+}
+
+.submit-button {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid burlywood;
+    margin-top: 10% !important;
+}
+
+.delete-form {
+    margin: 0;
+    position: absolute;
+    right: 0;
+}
+
+.update-form {
+    height: 50%;
 }
