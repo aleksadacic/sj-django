@@ -110,6 +110,7 @@ a:hover{
     font-family: Consolas;
     text-indent: 1%;
     height: 15vh;
+    resize: vertical;
 }
 
 .site-form {

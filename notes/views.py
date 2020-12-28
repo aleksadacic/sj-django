@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 from .models import Notes
 from . import forms
 from django.contrib.auth.decorators import login_required
-import logging
 
 
 @login_required(login_url="/accounts/login")
@@ -46,10 +45,9 @@ def notes_search(request):
         query = request.POST.get('query')
         if len(query) > 0:
             notes = Notes.objects.filter(text__contains=query, user_id=request.user.id).order_by('-date')
-            redirect("notes:list")
     form = forms.CreateNote()
-    return render(request, 'notes/notes_list.html', {'notes': notes, 'form': form})
-
+    update_form = forms.UpdateNote()
+    return render(request, 'notes/notes_list.html', {'notes': notes, 'form': form, 'update_form': update_form})
 
 @login_required(login_url="/accounts/login")
 def notes_update(request):
