@@ -1,0 +1,49 @@
+{% extends 'base_layout.html' %}
+
+{% block stats %}
+
+    <div style="display: flex;">
+        <div id="container" style="width: 50%;">
+            <canvas id="pie-chart"></canvas>
+        </div>
+        <div style="display: flex; flex-direction: column">
+            <span>
+                Average notes per user: {{ avg_notes }}
+            </span>
+            <span>
+                Average todos per user: {{ avg_todos }}
+            </span>
+            <span>
+                Average posting time: {{ avg_time }}h
+            </span>
+        </div>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#fcba03', '#476940'
+          ],
+          label: 'Population'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+
+{% endblock %}

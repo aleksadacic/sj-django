@@ -17,6 +17,10 @@
                 |
                 <a href="{% url 'todos:list' %}">Todo list</a>
             {% endif %}
+            {% if user.is_superuser %}
+                |
+                <a href={% url 'stats:stats_page' %}>Stats</a>
+            {% endif %}
         </div>
         <div class="nav-list">
             {% if user.is_authenticated == False %}
@@ -37,6 +41,8 @@
         {% block todos %}
         {% endblock %}
         {% block accounts %}
+        {% endblock %}
+        {% block stats %}
         {% endblock %}
     </div>
 </body>

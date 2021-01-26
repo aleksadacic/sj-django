@@ -34,7 +34,8 @@ def notes_delete(request):
     note_id = request.POST.get('id_note')
     if request.method == 'POST':
         note = Notes.objects.get(pk=note_id)
-        note.delete()
+        if note.user == request.user.id:
+            note.delete()
     return redirect('notes:list')
 
 
@@ -56,6 +57,7 @@ def notes_update(request):
         if update_form.is_valid():
             note_id = request.POST.get('id_note')
             note = Notes.objects.get(pk=note_id)
-            note.text = update_form['text'].value()
-            note.save()
+            if note.user == request.user.id:
+                note.text = update_form['text'].value()
+                note.save()
     return redirect("notes:list")
